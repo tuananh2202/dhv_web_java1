@@ -79,7 +79,7 @@
         <button class="operator" onclick="press('*')">×</button>
         <button class="operator" onclick="press('/')">÷</button>
 
-        <button onclick="press('7')">7</button>
+        <button onclick="press('7')">9</button>
         <button onclick="press('8')">8</button>
         <button onclick="press('9')">9</button>
         <button class="equal" onclick="calculate()">=</button>
