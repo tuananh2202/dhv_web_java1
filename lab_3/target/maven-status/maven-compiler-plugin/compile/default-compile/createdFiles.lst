@@ -1,0 +1,5 @@
+context/DBContext.class
+dao/ProductDAO.class
+model/Record.class
+model/Product.class
+dao/RecordDAO.class
