@@ -1,0 +1,139 @@
+body {
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: radial-gradient(circle at top, #4c8bf5 0%, #67d1f5 45%, #f3f7ff 100%);
+  color: #2d3a4f;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 24px;
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(118, 146, 255, 0.18);
+}
+
+h1 {
+  margin: 0 0 12px;
+  font-size: 32px;
+  line-height: 1.1;
+  color: #1f2a47;
+}
+
+.subtitle {
+  margin: 0 0 28px;
+  color: #5c6a88;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #45506e;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  border: 1px solid #d9e2f0;
+  border-radius: 14px;
+  background: #f8fbff;
+  color: #27374d;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  border-color: #6c8cf5;
+  box-shadow: 0 0 0 4px rgba(108, 140, 245, 0.12);
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2b6df5 0%, #51d3ff 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.message {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+}
+
+.message.success {
+  background: #e7f9ee;
+  color: #1e5d32;
+  border: 1px solid #a2dec1;
+}
+
+.message.error {
+  background: #ffe9ea;
+  color: #8e2031;
+  border: 1px solid #f3b6bc;
+}
+
+.note {
+  margin-top: 24px;
+  padding: 14px 16px;
+  background: #eef4ff;
+  border-radius: 14px;
+  color: #415a80;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+p.link {
+  margin-top: 22px;
+  text-align: center;
+}
+
+p.link a {
+  color: #2b6df5;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+p.link a:hover {
+  text-decoration: underline;
+}
+
+.small-text {
+  font-size: 0.95rem;
+  color: #65718a;
+}

@@ -1,0 +1,10 @@
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:24:30 +0000] "POST /dangnhap.jsp HTTP/1.1" 200 1025 http-bio-8080-exec-1 985
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:24:30 +0000] "GET /css/styles.css HTTP/1.1" 304 - http-bio-8080-exec-3 7
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:24:35 +0000] "POST /dangnhap.jsp HTTP/1.1" 200 1038 http-bio-8080-exec-5 10
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:24:44 +0000] "POST /dangnhap.jsp HTTP/1.1" 200 1025 http-bio-8080-exec-7 11
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:25:02 +0000] "POST /dangnhap.jsp HTTP/1.1" 200 1038 http-bio-8080-exec-9 9
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:25:46 +0000] "GET / HTTP/1.1" 200 577 http-bio-8080-exec-10 39
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:25:47 +0000] "GET /dangky.jsp HTTP/1.1" 200 3822 http-bio-8080-exec-10 64
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:25:52 +0000] "GET /dangky.jsp?checkUsername=123 HTTP/1.1" 200 8 http-bio-8080-exec-5 22
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:26:22 +0000] "GET /dangky.jsp?checkUsername=123 HTTP/1.1" 200 8 http-bio-8080-exec-9 8
+0:0:0:0:0:0:0:1 - - [01/Jul/2026:08:26:34 +0000] "GET /dangky.jsp?checkUsername=123 HTTP/1.1" 200 8 http-bio-8080-exec-4 6
