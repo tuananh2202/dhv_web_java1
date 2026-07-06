@@ -44,7 +44,7 @@
                     session.setAttribute("loginAttempts", 0);
                     session.removeAttribute("lockUntil");
                     session.setAttribute("username", usernameOrEmail);
-                    response.sendRedirect("http://localhost:8081/index.jsp");
+                    response.sendRedirect(request.getContextPath() + "/index.jsp");
                     return;
                 } else {
                     loginAttempts++;
@@ -86,8 +86,7 @@
 <main>
     <div class="container">
         <h1>Đăng nhập</h1>
-        <p class="subtitle">Nhập Username hoặc Email để đăng nhập vào ứng dụng.</p>
-
+        <p class="subtitle">Nhập Username hoặc Email để đăng nhập vào hệ thống.</p>
         <% if (message != null) { %>
             <div class="message <%= messageClass %>"><%= message %></div>
         <% } %>
