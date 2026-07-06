@@ -17,10 +17,11 @@
     RecordDAO dao = new RecordDAO();
 
     if ("POST".equalsIgnoreCase(request.getMethod()) && request.getParameter("deleteId") != null) {
-        try {
+            try {
             int deleteId = Integer.parseInt(request.getParameter("deleteId"));
             dao.deleteRecord(deleteId);
-            response.sendRedirect(request.getRequestURI());
+            out.print("<script>location.href=location.pathname;</script>");
+            out.flush();
             return;
         } catch (NumberFormatException ignored) {
         }
@@ -65,7 +66,8 @@
                     int id = Integer.parseInt(request.getParameter("id"));
                     boolean updated = dao.updateRecord(new Record(id, sname.trim(), course.trim(), fee));
                     if (updated) {
-                        response.sendRedirect(request.getRequestURI());
+                        out.print("<script>location.href=location.pathname;</script>");
+                        out.flush();
                         return;
                     } else {
                         message = "Cập nhật thất bại.";
@@ -73,11 +75,13 @@
                 } catch (NumberFormatException e) {
                     message = "ID cập nhật không hợp lệ.";
                 }
-            } else {
-                boolean inserted = dao.insertRecord(new Record(0, sname.trim(), course.trim(), fee));
-                if (inserted) {
-                    response.sendRedirect(request.getRequestURI());
-                    return;
+                } else {
+                int newId = dao.insertRecord(new Record(0, sname.trim(), course.trim(), fee));
+                if (newId > 0) {
+                    idValue = String.valueOf(newId);
+                    formAction = "update";
+                    message = "Đã thêm thành công. Bây giờ bạn có thể cập nhật nếu muốn.";
+                    messageClass = "success";
                 } else {
                     message = "Lưu thất bại. Vui lòng kiểm tra kết nối DB.";
                 }

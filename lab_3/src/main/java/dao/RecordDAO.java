@@ -39,22 +39,29 @@ public class RecordDAO {
         return list;
     }
 
-    public boolean insertRecord(Record record) {
+    public int insertRecord(Record record) {
         String sql = "INSERT INTO records(stname, courses, fee) VALUES(?, ?, ?)";
 
         try (
                 Connection conn = new DBContext().getConnection();
-                PreparedStatement ps = conn.prepareStatement(sql)
+                PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, record.getStname());
             ps.setString(2, record.getCourses());
             ps.setInt(3, record.getFee());
-            return ps.executeUpdate() > 0;
+            int affected = ps.executeUpdate();
+            if (affected > 0) {
+                try (ResultSet keys = ps.getGeneratedKeys()) {
+                    if (keys.next()) {
+                        return keys.getInt(1);
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
 
     public boolean updateRecord(Record record) {
