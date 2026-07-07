@@ -1,236 +1,421 @@
-/*
-    div
-    {
-        background-color: rgb(198, 211, 162);
-    }
-        */
+* {
+    box-sizing: border-box;
+}
 
-    .container {
-        padding: 5px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    .kieu1 {
-        width: 300px;
-        height: 30px;
-        border: rgb(120, 18, 129) 1px solid;
-        border-radius: 5%;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #4c8bf5 0%, #68d2f5 48%, #f4f8ff 100%);
+    color: #122047;
+}
 
-    .kieu2 {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 20pt;
-    }
+/* =========================
+   BỐ CỤC CHUNG
+========================= */
+main {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
 
-    input {
-        background-color: antiquewhite;
-        font-size: 20pt;
-    }
+.container {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 34px 36px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 24px;
+    border: 1px solid rgba(160, 180, 220, 0.35);
+    box-shadow: 0 24px 70px rgba(20, 40, 80, 0.16);
+}
 
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-    }
+/* =========================
+   TIÊU ĐỀ + CHỮ
+========================= */
+h1 {
+    margin: 0 0 14px 0;
+    font-size: 36px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #122047;
+}
 
-    #noidung {
-        width: 1000px; height: 500px; background-color: beige;
-    }
+h2 {
+    margin: 32px 0 12px 0;
+    font-size: 30px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: #122047;
+}
 
-    .container1 {
-        width: 100%; display: flex; justify-content: center;
-    }
+p,
+.subtitle {
+    margin: 0 0 20px 0;
+    color: #5c6a88;
+    font-size: 17px;
+    line-height: 1.6;
+}
 
-    .button1 {
-        cursor:pointer;
-        background-color: #3498db;
-        border:none;
-        color:#fff;
-        display: block;
-        font-size: 1rem;
-        margin-top: 20px;
-        padding: 12px;
-        border-radius: 4px;
-    }
+hr {
+    border: none;
+    height: 1px;
+    background: #dbe5f3;
+    margin: 30px 0;
+}
 
-    body {
-        font-family: "Segoe UI", Roboto, Arial, sans-serif;
-        background: radial-gradient(circle at top, #4c8bf5 0%, #67d1f5 45%, #f3f7ff 100%);
-        color: #2d3a4f;
-        margin: 0;
-        min-height: 100vh;
-    }
+a {
+    color: #2b6df5;
+    text-decoration: none;
+    font-weight: 700;
+}
 
+a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   FORM ĐĂNG NHẬP / ĐĂNG KÝ
+   Giống form mẫu bạn gửi
+========================= */
+.container > form {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* Nếu JSP có <br> thì ẩn để form không bị cách dòng xấu */
+.container > form br {
+    display: none;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px 0;
+    font-size: 16px;
+    font-weight: 800;
+    color: #122047;
+}
+
+/* Ô nhập chính */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input:not([type]) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 56px;
+    padding: 0 16px;
+    margin: 0 0 22px 0;
+    border: 1px solid #cfdcf0;
+    border-radius: 14px;
+    background: #f8fbff;
+    color: #27374d;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    outline: none;
+    box-shadow: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input:not([type]):focus {
+    border-color: #4c8bf5;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(76, 139, 245, 0.14);
+}
+
+/* Không style input hidden */
+input[type="hidden"] {
+    display: none;
+}
+
+/* =========================
+   BUTTON
+========================= */
+button,
+.button1,
+.button-link {
+    display: inline-block;
+    width: 100%;
+    min-height: 56px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #2b6df5 0%, #51d3ff 100%);
+    color: #ffffff;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+.button1:hover,
+.button-link:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+    box-shadow: 0 10px 24px rgba(43, 109, 245, 0.22);
+    text-decoration: none;
+}
+
+button.secondary,
+.button-link.secondary {
+    background: linear-gradient(135deg, #2d6a4f 0%, #6fcf97 100%);
+}
+
+/* =========================
+   MESSAGE
+========================= */
+.message {
+    margin: 18px 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.message.success {
+    background: #e7f9ee;
+    color: #1e5d32;
+    border: 1px solid #a2dec1;
+}
+
+.message.error {
+    background: #ffe9ea;
+    color: #8e2031;
+    border: 1px solid #f3b6bc;
+}
+
+.note {
+    margin-top: 22px;
+    padding: 14px 16px;
+    background: #eef4ff;
+    border-radius: 12px;
+    color: #415a80;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* =========================
+   LINK / MENU
+========================= */
+p.link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+p.link a {
+    color: #2b6df5;
+    font-weight: 700;
+}
+
+.menu-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 22px 0;
+}
+
+.menu-card {
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #eef4ff;
+    color: #1f2a47;
+    text-decoration: none;
+    font-weight: 700;
+    border: 1px solid #d9e2f0;
+}
+
+.menu-card:hover {
+    background: #e3ecff;
+    text-decoration: none;
+}
+
+/* =========================
+   BẢNG DANH SÁCH
+========================= */
+table,
+.data-table {
+    width: 100%;
+    margin-top: 18px;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 32px rgba(31, 42, 71, 0.08);
+}
+
+th,
+td,
+.data-table th,
+.data-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e3eaf5;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 15px;
+    color: #1f2a47;
+}
+
+th,
+.data-table th {
+    background: #eef4ff;
+    font-weight: 800;
+    color: #122047;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #f8fbff;
+}
+
+/* Cột ID */
+th:first-child,
+td:first-child {
+    width: 70px;
+    text-align: center;
+}
+
+/* Cột Fee */
+th:nth-child(4),
+td:nth-child(4) {
+    width: 90px;
+    text-align: center;
+}
+
+/* Cột Edit/Delete */
+th:nth-child(5),
+td:nth-child(5),
+th:nth-child(6),
+td:nth-child(6) {
+    width: 70px;
+    text-align: center;
+}
+
+/* Form trong bảng để nút sửa/xóa không bị kéo full ngang */
+td form {
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/* Nút icon sửa/xóa */
+.icon-button {
+    width: 42px;
+    height: 40px;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 10px;
+    font-size: 17px;
+    line-height: 40px;
+}
+
+/* =========================
+   CLASS CŨ GIỮ LẠI ĐỂ TRANG KHÁC KHÔNG LỖI
+========================= */
+.kieu1 {
+    width: 300px;
+    height: 30px;
+    border: 1px solid rgb(120, 18, 129);
+    border-radius: 5px;
+}
+
+.kieu2 {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+#noidung {
+    width: 100%;
+    min-height: 500px;
+    background-color: beige;
+}
+
+.container1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
     main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 24px;
+        padding: 24px 12px;
     }
 
     .container {
-        width: 100%;
-        max-width: 720px;
-        padding: 34px;
-        background: rgba(255, 255, 255, 0.96);
-        border-radius: 24px;
-        box-shadow: 0 24px 72px rgba(0, 0, 0, 0.12);
-        border: 1px solid rgba(118, 146, 255, 0.18);
-        margin-bottom: 24px;
+        padding: 24px 18px;
+        border-radius: 18px;
     }
 
     h1 {
-        margin: 0 0 12px;
-        font-size: 32px;
-        color: #1f2a47;
+        font-size: 30px;
     }
 
+    h2 {
+        font-size: 25px;
+    }
+
+    p,
     .subtitle {
-        margin: 0 0 24px;
-        color: #5c6a88;
-        line-height: 1.5;
+        font-size: 15px;
+    }
+
+    table,
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th,
+    td,
+    .data-table th,
+    .data-table td {
+        padding: 12px 10px;
+        font-size: 14px;
     }
 
     input[type="text"],
     input[type="password"],
     input[type="email"],
-    input[type="number"] {
-        width: 100%;
-        padding: 14px 16px;
-        margin-bottom: 18px;
-        border: 1px solid #d9e2f0;
-        border-radius: 14px;
-        background: #f8fbff;
-        color: #27374d;
-        font-size: 1rem;
+    input[type="number"],
+    input:not([type]) {
+        height: 52px;
+        font-size: 15px;
     }
 
-    input[type="text"]:focus,
-    input[type="password"]:focus,
-    input[type="email"]:focus,
-    input[type="number"]:focus {
-        border-color: #6c8cf5;
-        box-shadow: 0 0 0 4px rgba(108, 140, 245, 0.12);
-        outline: none;
-    }
-
-    button {
-        width: 100%;
-        padding: 14px 16px;
-        border: none;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #2b6df5 0%, #51d3ff 100%);
-        color: #ffffff;
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: transform 0.2s ease, filter 0.2s ease;
-    }
-
-    button:hover {
-        transform: translateY(-1px);
-        filter: brightness(1.03);
-    }
-
-    .message {
-        margin-bottom: 18px;
-        padding: 14px 16px;
-        border-radius: 14px;
-        font-size: 0.95rem;
-    }
-
-    .message.success {
-        background: #e7f9ee;
-        color: #1e5d32;
-        border: 1px solid #a2dec1;
-    }
-
-    .message.error {
-        background: #ffe9ea;
-        color: #8e2031;
-        border: 1px solid #f3b6bc;
-    }
-
-    .note {
-        margin-top: 24px;
-        padding: 14px 16px;
-        background: #eef4ff;
-        border-radius: 14px;
-        color: #415a80;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    p.link {
-        margin-top: 20px;
-        text-align: center;
-    }
-
-    p.link a {
-        color: #2b6df5;
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-    p.link a:hover {
-        text-decoration: underline;
-    }
-
+    button,
+    .button1,
     .button-link {
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 12px;
-        padding: 14px 16px;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #2b6df5 0%, #51d3ff 100%);
-        color: #fff;
-        text-align: center;
-        text-decoration: none;
-        font-weight: 700;
+        min-height: 52px;
+        font-size: 15px;
     }
-
-    .button-link.secondary,
-    button.secondary {
-        background: linear-gradient(135deg, #2d6a4f 0%, #6fcf97 100%);
-    }
-
-    .menu-grid {
-        display: grid;
-        gap: 12px;
-        margin: 20px 0;
-    }
-
-    .menu-card {
-        display: block;
-        padding: 16px 18px;
-        border-radius: 14px;
-        background: #eef4ff;
-        color: #1f2a47;
-        text-decoration: none;
-        font-weight: 600;
-        border: 1px solid #d9e2f0;
-    }
-
-    .data-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 16px;
-    }
-
-    .data-table th,
-    .data-table td {
-        border: 1px solid #d9e2f0;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .data-table th {
-        background: #eef4ff;
-    }
-
-    .icon-button {
-        width: auto;
-        padding: 8px;
-        border-radius: 8px;
-    }
+}

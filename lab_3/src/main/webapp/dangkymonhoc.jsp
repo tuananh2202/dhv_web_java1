@@ -3,14 +3,57 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Record" %>
 <%@ page import="dao.RecordDAO" %>
+<%!
+    private String h(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#39;");
+    }
+
+    private String firstHeaderValue(String value) {
+        if (value == null) {
+            return null;
+        }
+        int commaIndex = value.indexOf(',');
+        if (commaIndex >= 0) {
+            value = value.substring(0, commaIndex);
+        }
+        value = value.trim();
+        return value.length() == 0 ? null : value;
+    }
+%>
 <%
     request.setCharacterEncoding("UTF-8");
     response.setContentType("text/html; charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
 
+    String contextPath = request.getContextPath();
+    String forwardedProto = firstHeaderValue(request.getHeader("X-Forwarded-Proto"));
+    String forwardedHost = firstHeaderValue(request.getHeader("X-Forwarded-Host"));
+    String appBaseUrl = contextPath;
+
+    if (forwardedHost != null) {
+        if (forwardedProto == null) {
+            forwardedProto = "https";
+        }
+        appBaseUrl = forwardedProto + "://" + forwardedHost + contextPath;
+    }
+
+    String pageUrl = appBaseUrl + "/dangkymonhoc.jsp";
+    String loginUrl = appBaseUrl + "/dangnhap.jsp";
+    String indexUrl = appBaseUrl + "/index.jsp";
+    String sanphamUrl = appBaseUrl + "/sanpham.jsp";
+    String logoutUrl = appBaseUrl + "/logout.jsp";
+
     String username = (String) session.getAttribute("username");
     if (username == null) {
-        response.sendRedirect(request.getContextPath() + "/dangnhap.jsp");
+        response.sendRedirect(loginUrl);
         return;
     }
 
@@ -32,7 +75,7 @@
             try {
                 int deleteId = Integer.parseInt(request.getParameter("deleteId"));
                 dao.deleteRecord(deleteId);
-                response.sendRedirect(request.getRequestURI());
+                response.sendRedirect(pageUrl);
                 return;
             } catch (NumberFormatException e) {
                 message = "ID xóa không hợp lệ.";
@@ -53,6 +96,9 @@
                     courseValue = record.getCourses();
                     feeValue = String.valueOf(record.getFee());
                     formAction = "update";
+                } else {
+                    message = "Không tìm thấy bản ghi cần sửa.";
+                    messageClass = "error";
                 }
             } catch (NumberFormatException e) {
                 message = "ID sửa không hợp lệ.";
@@ -90,7 +136,7 @@
                         int id = Integer.parseInt(request.getParameter("id"));
                         boolean updated = dao.updateRecord(new Record(id, sname.trim(), course.trim(), fee));
                         if (updated) {
-                            response.sendRedirect(request.getRequestURI());
+                            response.sendRedirect(pageUrl);
                             return;
                         } else {
                             message = "Cập nhật thất bại.";
@@ -107,8 +153,8 @@
                     try {
                         int newId = dao.insertRecord(new Record(0, sname.trim(), course.trim(), fee));
                         if (newId > 0) {
-                            message = "Đã thêm thành công.";
-                            messageClass = "success";
+                            response.sendRedirect(pageUrl);
+                            return;
                         } else {
                             message = "Lưu thất bại. Vui lòng kiểm tra kết nối DB.";
                             messageClass = "error";
@@ -163,75 +209,108 @@
 <main>
     <div class="container">
         <h1>Đăng ký môn học</h1>
-        <p class="subtitle">Chào mừng <strong><%= username %></strong>. Đây là trang đăng ký môn học.</p>
-        <p class="link"><a href="index.jsp">Trang chủ</a> · <a href="sanpham.jsp">Xem sản phẩm</a> · <a href="logout.jsp">Đăng xuất</a></p>
-
-        <form id="register_form" method="post" accept-charset="UTF-8">
-            <input type="hidden" name="id" value="<%= idValue %>" />
-            <input type="hidden" name="formAction" value="<%= formAction %>" />
-            <div class="form_group">
-                <label for="sname">Student name</label>
-                <input id="sname" name="sname" value="<%= snameValue %>" />
-            </div>
-
-            <div class="form_group">
-                <label for="course">Course</label>
-                <input id="course" name="course" value="<%= courseValue %>" />
-            </div>
-
-            <div class="form_group">
-                <label for="fee">Fee</label>
-                <input id="fee" name="fee" type="number" min="1" step="1" value="<%= feeValue %>" />
-            </div>
-
-            <div>
-                <button type="submit"><%= "update".equals(formAction) ? "Cập nhật" : "Submit" %></button>
-            </div>
-        </form>
+        <p class="subtitle">
+            Xin chào <strong><%= h(username) %></strong>, bạn có thể thêm, sửa hoặc xóa thông tin đăng ký môn học tại đây.
+        </p>
+        <p class="link">
+            <a href="<%= h(sanphamUrl) %>">Xem sản phẩm</a>
+            ·
+            <a href="<%= h(logoutUrl) %>">Đăng xuất</a>
+        </p>
 
         <% if (message != null && !message.trim().isEmpty()) { %>
-            <div class="message <%= messageClass %>"><%= message %></div>
+            <div class="message <%= h(messageClass) %>"><%= h(message) %></div>
         <% } %>
-    </div>
 
-    <div class="container">
+        <hr />
+
         <div class="panel-secondary">
-            <h2>Danh sách đăng ký</h2>
+            <h2><%= "update".equals(formAction) ? "Cập nhật đăng ký môn học" : "Thêm đăng ký môn học" %></h2>
+            <p class="subtitle">
+                <%= "update".equals(formAction)
+                        ? "Bạn đang sửa bản ghi ID " + h(idValue) + ". Kiểm tra lại thông tin rồi bấm Lưu cập nhật."
+                        : "Nhập thông tin sinh viên, môn học và học phí để tạo đăng ký mới." %>
+            </p>
+
+            <form id="register_form" action="<%= h(pageUrl) %>" method="post" accept-charset="UTF-8">
+                <input type="hidden" name="id" value="<%= h(idValue) %>" />
+                <input type="hidden" name="formAction" value="<%= h(formAction) %>" />
+
+                <p>
+                    <label for="sname"><strong>Student name</strong></label><br />
+                    <input id="sname" name="sname" value="<%= h(snameValue) %>" placeholder="Nhập tên sinh viên" size="45" required />
+                </p>
+
+                <p>
+                    <label for="course"><strong>Course</strong></label><br />
+                    <input id="course" name="course" value="<%= h(courseValue) %>" placeholder="Nhập tên môn học" size="45" required />
+                </p>
+
+                <p>
+                    <label for="fee"><strong>Fee</strong></label><br />
+                    <input id="fee" name="fee" type="number" min="1" step="1" value="<%= h(feeValue) %>" placeholder="Nhập học phí" size="45" required />
+                </p>
+
+                <p>
+                    <button type="submit"><%= "update".equals(formAction) ? "Lưu cập nhật" : "Thêm đăng ký" %></button>
+                    <% if ("update".equals(formAction)) { %>
+                        <a href="<%= h(pageUrl) %>">Hủy sửa</a>
+                    <% } %>
+                </p>
+            </form>
+        </div>
+
+        <hr />
+
+        <div class="panel-secondary">
+            <h2>Danh sách đăng ký môn học</h2>
+            <p class="subtitle">Tổng số bản ghi: <strong><%= records != null ? records.size() : 0 %></strong></p>
+
             <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Student name</th>
-                    <th>Course</th>
-                    <th>Fee</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student name</th>
+                        <th>Course</th>
+                        <th>Fee</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <%
-                    if (records != null) {
+                    if (records != null && !records.isEmpty()) {
                         for (Record r : records) {
                 %>
-                <tr>
-                    <td><%= r.getId() %></td>
-                    <td><%= r.getStname() %></td>
-                    <td><%= r.getCourses() %></td>
-                    <td><%= r.getFee() %></td>
-                    <td>
-                        <form method="get" style="margin:0;">
-                            <input type="hidden" name="editId" value="<%= r.getId() %>" />
-                            <button type="submit" title="Edit" class="icon-button">✏️</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form method="post" style="margin:0;" onsubmit="return confirmDelete();">
-                            <input type="hidden" name="deleteId" value="<%= r.getId() %>" />
-                            <button type="submit" title="Delete" class="icon-button delete-button">✖️</button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><%= r.getId() %></td>
+                        <td><%= h(r.getStname()) %></td>
+                        <td><%= h(r.getCourses()) %></td>
+                        <td><%= r.getFee() %></td>
+                        <td>
+                            <form action="<%= h(pageUrl) %>" method="get">
+                                <input type="hidden" name="editId" value="<%= r.getId() %>" />
+                                <button type="submit" title="Sửa" class="icon-button">✏️</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="<%= h(pageUrl) %>" method="post" onsubmit="return confirmDelete();">
+                                <input type="hidden" name="deleteId" value="<%= r.getId() %>" />
+                                <button type="submit" title="Xóa" class="icon-button delete-button">✖️</button>
+                            </form>
+                        </td>
+                    </tr>
                 <%
                         }
+                    } else {
+                %>
+                    <tr>
+                        <td colspan="6">Chưa có dữ liệu đăng ký môn học.</td>
+                    </tr>
+                <%
                     }
                 %>
+                </tbody>
             </table>
         </div>
     </div>

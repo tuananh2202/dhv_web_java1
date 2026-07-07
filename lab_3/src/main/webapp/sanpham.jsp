@@ -21,7 +21,7 @@
     <div class="container">
         <h1>Danh sách sản phẩm</h1>
         <p class="subtitle">Chào mừng <strong><%= username %></strong>. Bạn đang xem dữ liệu sản phẩm từ cơ sở dữ liệu appdb.</p>
-        <p class="link"><a href="index.jsp">Trang chủ</a> · <a href="dangkymonhoc.jsp">Đăng ký môn học</a> · <a href="logout.jsp">Đăng xuất</a></p>
+        <p class="link"><a href="dangkymonhoc.jsp">Đăng ký môn học</a> · <a href="logout.jsp">Đăng xuất</a></p>
         <table class="data-table">
             <tr>
                 <th>ID</th>
