@@ -33,8 +33,8 @@
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                conn = new DBContext().getConnection();
-                String sql = "SELECT id FROM tbl_user WHERE (username = ? OR email = ?) AND password = SHA2(?, 256)";
+                conn = new DBContext().getConnection("school");
+                String sql = "SELECT id, username FROM tbl_user WHERE (username = ? OR email = ?) AND password = SHA2(?, 256)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, usernameOrEmail);
                 ps.setString(2, usernameOrEmail);
@@ -43,8 +43,13 @@
                 if (rs.next()) {
                     session.setAttribute("loginAttempts", 0);
                     session.removeAttribute("lockUntil");
-                    session.setAttribute("username", usernameOrEmail);
-                    response.sendRedirect(request.getContextPath() + "/index.jsp");
+                    session.setAttribute("username", rs.getString("username"));
+
+                    // Dùng redirect tương đối để trình duyệt tự giữ đúng domain/port hiện tại.
+                    // Cách này tránh bị nhảy cứng sang http://localhost:8080/dangkymonhoc.jsp
+                    // khi chạy qua GitHub Codespaces / forwarded port / proxy.
+                    response.setStatus(302);
+                    response.setHeader("Location", response.encodeRedirectURL("dangkymonhoc.jsp"));
                     return;
                 } else {
                     loginAttempts++;
@@ -87,11 +92,12 @@
     <div class="container">
         <h1>Đăng nhập</h1>
         <p class="subtitle">Nhập Username hoặc Email để đăng nhập vào hệ thống.</p>
+        <p class="link"><a href="index.jsp">Trang chủ</a></p>
         <% if (message != null) { %>
             <div class="message <%= messageClass %>"><%= message %></div>
         <% } %>
 
-        <form action="dangnhap.jsp" method="post">
+        <form action="" method="post">
             <label for="username">Username hoặc Email</label>
             <input type="text" id="username" name="username" required />
 

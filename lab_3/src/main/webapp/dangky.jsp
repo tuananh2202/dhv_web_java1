@@ -9,7 +9,7 @@
         ResultSet rs = null;
         boolean exists = false;
         try {
-            conn = new DBContext().getConnection();
+            conn = new DBContext().getConnection("school");
             String query = "SELECT id FROM tbl_user WHERE username = ?";
             ps = conn.prepareStatement(query);
             ps.setString(1, checkUsername);
@@ -38,6 +38,7 @@
     <div class="container">
         <h1>Đăng ký tài khoản</h1>
         <p class="subtitle">Tạo tài khoản mới để đăng nhập vào hệ thống.</p>
+        <p class="link"><a href="index.jsp">Trang chủ</a> · <a href="dangnhap.jsp">Đăng nhập</a></p>
         <%
             String message = null;
             String messageClass = "";
@@ -63,7 +64,7 @@
                 PreparedStatement ps = null;
                 ResultSet rs = null;
                 try {
-                    conn = new DBContext().getConnection();
+                    conn = new DBContext().getConnection("school");
                     String checkSql = "SELECT id FROM tbl_user WHERE username = ? OR email = ?";
                     ps = conn.prepareStatement(checkSql);
                     ps.setString(1, username);

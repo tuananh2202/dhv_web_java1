@@ -5,62 +5,43 @@
     }
         */
 
-
-
-   
-
-    .container
-    {
+    .container {
         padding: 5px;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-
     }
 
-    .kieu1
-    {
+    .kieu1 {
         width: 300px;
         height: 30px;
         border: rgb(120, 18, 129) 1px solid;
         border-radius: 5%;
-
     }
 
-     .kieu2
-    {
+    .kieu2 {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 20pt;
-
     }
 
-    input
-    {
+    input {
         background-color: antiquewhite;
         font-size: 20pt;
     }
 
-    body{
+    body {
         margin: 0;
         padding: 0;
         font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
-    #noidung
-    {
-
-        width: 1000px; height: 500px; background-color: beige; 
-
-
+    #noidung {
+        width: 1000px; height: 500px; background-color: beige;
     }
 
-    .container1
-    {
+    .container1 {
         width: 100%; display: flex; justify-content: center;
     }
 
-
-    .button1
-    {
+    .button1 {
         cursor:pointer;
         background-color: #3498db;
         border:none;
@@ -70,7 +51,6 @@
         margin-top: 20px;
         padding: 12px;
         border-radius: 4px;
-
     }
 
     body {
@@ -91,12 +71,13 @@
 
     .container {
         width: 100%;
-        max-width: 520px;
+        max-width: 720px;
         padding: 34px;
         background: rgba(255, 255, 255, 0.96);
         border-radius: 24px;
         box-shadow: 0 24px 72px rgba(0, 0, 0, 0.12);
         border: 1px solid rgba(118, 146, 255, 0.18);
+        margin-bottom: 24px;
     }
 
     h1 {
@@ -194,4 +175,62 @@
 
     p.link a:hover {
         text-decoration: underline;
+    }
+
+    .button-link {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 12px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #2b6df5 0%, #51d3ff 100%);
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .button-link.secondary,
+    button.secondary {
+        background: linear-gradient(135deg, #2d6a4f 0%, #6fcf97 100%);
+    }
+
+    .menu-grid {
+        display: grid;
+        gap: 12px;
+        margin: 20px 0;
+    }
+
+    .menu-card {
+        display: block;
+        padding: 16px 18px;
+        border-radius: 14px;
+        background: #eef4ff;
+        color: #1f2a47;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid #d9e2f0;
+    }
+
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+    }
+
+    .data-table th,
+    .data-table td {
+        border: 1px solid #d9e2f0;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .data-table th {
+        background: #eef4ff;
+    }
+
+    .icon-button {
+        width: auto;
+        padding: 8px;
+        border-radius: 8px;
     }

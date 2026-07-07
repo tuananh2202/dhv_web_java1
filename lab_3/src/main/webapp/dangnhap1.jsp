@@ -33,8 +33,8 @@
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                conn = new DBContext().getConnection();
-                String sql = "SELECT id FROM tbl_user WHERE (username = ? OR email = ?) AND password = SHA2(?, 256)";
+                conn = new DBContext().getConnection("school");
+                String sql = "SELECT id, username FROM tbl_user WHERE (username = ? OR email = ?) AND password = SHA2(?, 256)";
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, usernameOrEmail);
                 ps.setString(2, usernameOrEmail);
@@ -43,8 +43,8 @@
                 if (rs.next()) {
                     session.setAttribute("loginAttempts", 0);
                     session.removeAttribute("lockUntil");
-                    session.setAttribute("username", usernameOrEmail);
-                    response.sendRedirect("http://localhost:8081/index.jsp");
+                    session.setAttribute("username", rs.getString("username"));
+                    response.sendRedirect(request.getContextPath() + "/dangkymonhoc.jsp");
                     return;
                 } else {
                     loginAttempts++;
@@ -86,8 +86,8 @@
 <main>
     <div class="container">
         <h1>Đăng nhập</h1>
-        <p class="subtitle">Nhập Username hoặc Email để đăng nhập vào ứng dụng.</p>
-
+        <p class="subtitle">Nhập Username hoặc Email để đăng nhập vào hệ thống.</p>
+        <p class="link"><a href="index.jsp">Trang chủ</a></p>
         <% if (message != null) { %>
             <div class="message <%= messageClass %>"><%= message %></div>
         <% } %>
