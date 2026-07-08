@@ -7,15 +7,15 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Lab 4 - Môn Lập Trình Web</title>
+    <title>Môn Lập Trình Web</title>
     <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 <main>
     <div class="container">
-        <h1>Lab 4 - Môn Lập Trình Web</h1>
+        <h1 style="text-align: center;">Môn Lập Trình Web</h1>
         
-            <p class="subtitle">Chào mừng bạn đến với ứng dụng web của Lab 4. Vui lòng đăng nhập để tiếp tục.</p>
+            <p class="subtitle">Chào mừng bạn đến với ứng dụng web của Hoàng Tuấn Anh. Vui lòng đăng nhập để tiếp tục.</p>
             <button onclick="location.href='dangnhap.jsp'">Đăng nhập</button>
             <p class="link">Hoặc chưa có tài khoản? <a href="dangky.jsp">Đăng ký</a></p>
        

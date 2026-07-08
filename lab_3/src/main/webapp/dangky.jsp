@@ -38,7 +38,7 @@
     <div class="container">
         <h1>Đăng ký tài khoản</h1>
         <p class="subtitle">Tạo tài khoản mới để đăng nhập vào hệ thống.</p>
-        <p class="link"><a href="index.jsp">Trang chủ</a> · <a href="dangnhap.jsp">Đăng nhập</a></p>
+        <p class="link"><a href="index.jsp">Trang chủ</a></p>
         <%
             String message = null;
             String messageClass = "";

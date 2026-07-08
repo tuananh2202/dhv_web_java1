@@ -2,7 +2,6 @@ package dao;
 
 import context.DBContext;
 import model.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,52 +10,46 @@ import java.util.List;
 
 public class ProductDAO {
 
-    public ProductDAO() {
-    }
-
-    // ---------------- GET ALL ----------------
     public List<Product> getAllProducts() {
+        List<Product> list = new ArrayList<>();
 
-    List<Product> list = new ArrayList<>();
+        String sql = "SELECT " +
+                "id AS ProductID, " +
+                "product_name AS ProductName, " +
+                "supplier_ids AS SupplierID, " +
+                "category AS CategoryID, " +
+                "quantity_per_unit AS QuantityPerUnit, " +
+                "list_price AS UnitPrice, " +
+                "target_level AS UnitsInStock " +
+                "FROM Product";
 
-    String sql = """
-            SELECT productId,
-                   productName,
-                   supplierId,
-                   categoryId,
-                   quantityPerUnit,
-                   unitPrice,
-                   unitsInStock
-            FROM Product
-            """;
-
-    try (
+        try {
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()
-    ) {
+            ResultSet rs = ps.executeQuery();
 
-        while (rs.next()) {
+            while (rs.next()) {
+                Product p = new Product();
 
-            Product p = new Product(
-                    rs.getInt("productId"),
-                    rs.getString("productName"),
-                    rs.getInt("supplierId"),
-                    rs.getInt("categoryId"),
-                    rs.getString("quantityPerUnit"),
-                    rs.getDouble("unitPrice"),
-                    rs.getInt("unitsInStock")
-            );
+                p.setProductID(rs.getInt("ProductID"));
+                p.setProductName(rs.getString("ProductName"));
+                p.setSupplierID(rs.getString("SupplierID"));
+                p.setCategoryID(rs.getString("CategoryID"));
+                p.setQuantityPerUnit(rs.getString("QuantityPerUnit"));
+                p.setUnitPrice(rs.getDouble("UnitPrice"));
+                p.setUnitsInStock(rs.getInt("UnitsInStock"));
 
-            list.add(p);
+                list.add(p);
+            }
+
+            rs.close();
+            ps.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
+        return list;
     }
-
-    return list;
-}
-
-   
 }

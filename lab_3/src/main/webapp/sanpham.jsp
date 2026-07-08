@@ -25,12 +25,12 @@
         <table class="data-table">
             <tr>
                 <th>ID</th>
-                <th>Tên sản phẩm</th>
+                <th>Product name</th>
                 <th>Supplier ID</th>
-                <th>Category ID</th>
+                <th>Category</th>
                 <th>Quantity Per Unit</th>
-                <th>Unit Price</th>
-                <th>Units In Stock</th>
+                <th>List Price</th>
+                <th>Target Level</th>
             </tr>
 
             <%

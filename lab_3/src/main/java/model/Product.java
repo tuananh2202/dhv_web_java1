@@ -1,33 +1,15 @@
 package model;
 
 public class Product {
-
     private int productID;
     private String productName;
-    private int supplierID;
-    private int categoryID;
+    private String supplierID;
+    private String categoryID;
     private String quantityPerUnit;
     private double unitPrice;
     private int unitsInStock;
 
     public Product() {
-    }
-
-    public Product(int productID,
-                   String productName,
-                   int supplierID,
-                   int categoryID,
-                   String quantityPerUnit,
-                   double unitPrice,
-                   int unitsInStock) {
-
-        this.productID = productID;
-        this.productName = productName;
-        this.supplierID = supplierID;
-        this.categoryID = categoryID;
-        this.quantityPerUnit = quantityPerUnit;
-        this.unitPrice = unitPrice;
-        this.unitsInStock = unitsInStock;
     }
 
     public int getProductID() {
@@ -46,19 +28,19 @@ public class Product {
         this.productName = productName;
     }
 
-    public int getSupplierID() {
+    public String getSupplierID() {
         return supplierID;
     }
 
-    public void setSupplierID(int supplierID) {
+    public void setSupplierID(String supplierID) {
         this.supplierID = supplierID;
     }
 
-    public int getCategoryID() {
+    public String getCategoryID() {
         return categoryID;
     }
 
-    public void setCategoryID(int categoryID) {
+    public void setCategoryID(String categoryID) {
         this.categoryID = categoryID;
     }
 
